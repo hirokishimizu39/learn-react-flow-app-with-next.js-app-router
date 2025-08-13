@@ -6,21 +6,21 @@ import { useCallback, useState } from "react";
 
 const initialNodes = [
   {
-    id: "1",
+    id: "n1",
     position: { x: 0, y: 0 },
     type: "input",
-    data: { label: "1" },
+    data: { label: "n1" },
   },
   {
-    id: "2",
+    id: "n2",
     position: { x: 0, y: 100 },
     type: "input",
-    data: { label: "2" },
+    data: { label: "n2" },
   },
 ];
 
 const initialEdges = [
-  { id: 'e1-2', source: '1', target: '2' },
+  { id: 'n1-n2', source: 'n1', target: 'n2', animated: true, label: 'n1-n2' },
 ];
 
 export default function HomePage() {
@@ -29,15 +29,15 @@ export default function HomePage() {
   const [edges, setEdges] = useState(initialEdges);
 
   const onNodesChange = useCallback(
-    (changes) => setNodes((nodesSnapshot) => applyNodeChanges(changes, nodesSnapshot)),
+    (changes) => setNodes((prevNodes) => applyNodeChanges(changes, prevNodes)),
     [],
   );
   const onEdgesChange = useCallback(
-    (changes) => setEdges((edgesSnapshot) => applyEdgeChanges(changes, edgesSnapshot)),
+    (changes) => setEdges((prevEdges) => applyEdgeChanges(changes, prevEdges)),
     [],
   );
   const onConnect = useCallback(
-    (params) => setEdges((eds) => addEdge(params, eds)),
+    (params) => setEdges((prevEdges) => addEdge(params, prevEdges)),
     [],
   );
 
