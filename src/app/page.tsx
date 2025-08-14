@@ -5,15 +5,12 @@ import {
   ReactFlow, 
   Background, 
   Controls, 
-  applyNodeChanges, 
-  NodeChange, 
-  applyEdgeChanges, 
   addEdge, 
   useNodesState,
   Node,
   useEdgesState,
 } from "@xyflow/react";
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { ObjectiveNodeData } from "@/features/types/ObjectiveMapType";
 
 const initialNodes = [
@@ -91,7 +88,7 @@ const initialEdges = [
 export default function HomePage() {
 
   const [nodes, setNodes, onNodesChange] = useNodesState<Node<ObjectiveNodeData>>(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const [edges, setEdges, onEdgesChange] = useEdgesState<Edge<any>>(initialEdges);
 
   const onConnect = useCallback(
     (params: any) => setEdges((prevEdges) => addEdge(params, prevEdges)),
